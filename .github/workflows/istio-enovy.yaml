@@ -1,0 +1,20 @@
+name: istio-enovy
+
+on: [push]
+
+jobs:
+  build:
+    name: Build on ARM64
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: uraimo/run-on-arch-action@v1.0.9
+        with:
+          architecture: aarch64
+          distribution: ubuntu18.04
+          run: |
+            uname -a
+            echo ::set-output name=uname::$(uname -a)
+      - run: sh ./scripts/install-deps.sh
+
+
